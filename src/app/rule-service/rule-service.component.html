@@ -1,0 +1,36 @@
+<div class="card-container">
+  <a class="card card-small" (click)="getRuleDetails()" tabindex="0">
+    <span><h3>Fetch Rule</h3></span>
+  </a>
+  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <input name="ruleId" [(ngModel)]="ruleId" placeholder="Enter Rule Id">
+</div>
+
+<div class="loading-spinner" *ngIf="loadingRule">
+  <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
+  </mat-progress-spinner>
+</div>
+
+<div class="content" role="main">
+  <json-editor *ngIf="ruleDetails" class="w-100-p p-24" style="min-height: 80px;" [options]="editorOptions" [data]="ruleDetails"></json-editor>
+</div>
+
+<div class="loading-spinner" *ngIf="loadingMeta">
+  <br>
+  <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
+  </mat-progress-spinner>
+</div>
+
+<table *ngIf="ruleMetaDetails">
+  <thead>
+    <tr>
+      <td><b>Rule Name</b></td>
+      <td><b>Rule Id</b></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor ="let rule of ruleMetaDetails;">
+      <td>{{rule.ruleName}}</td>
+      <td>{{rule.ruleId}}</td>
+    </tr>
+  </tbody>
+</table>

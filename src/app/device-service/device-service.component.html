@@ -1,0 +1,27 @@
+<div class="card-container">
+  <a class="card card-small" (click)="getDeviceStatus()" tabindex="0">
+    <span><h3>Device status</h3></span>
+  </a>
+  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <input name="ruleId" ng-model="deviceId" placeholder="Enter Device Id">
+</div>
+
+<div class="loading-spinner" *ngIf="loading" display:block>
+  <br>
+  <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
+  </mat-progress-spinner>
+</div>
+
+<table *ngIf="deviceMetaDetails">
+  <thead>
+    <tr>
+      <td><b>Device Name</b></td>
+      <td><b>Device Id</b></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor ="let device of deviceMetaDetails;">
+      <td>{{device.deviceLabelName}}</td>
+      <td>{{device.deviceId}}</td>
+    </tr>
+  </tbody>
+</table>
