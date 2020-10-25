@@ -1,0 +1,27 @@
+<div class="card-container">
+  <a class="card card-small" (click)="getSceneDetails()" tabindex="0">
+    <span><h3>Fetch Scene</h3></span>
+  </a>
+  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <input name="sceneId" ng-model="sceneId" placeholder="Enter Scene Id">
+</div>
+
+<div class="loading-spinner" *ngIf="loading" display:block>
+  <br>
+  <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
+  </mat-progress-spinner>
+</div>
+
+<table *ngIf="sceneMetaDetails">
+  <thead>
+    <tr>
+      <td><b>Scene Name</b></td>
+      <td><b>Scene Id</b></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor ="let scene of sceneMetaDetails;">
+      <td>{{scene.sceneName}}</td>
+      <td>{{scene.sceneId}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,10 @@
+<div class="card-container">
+  <a class="card card-small" (click)='getSmartAppMetaDetails()' tabindex="0">
+    <span><h3>Fetch SmartApp</h3></span>
+  </a>
+  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <input name="smartAppId" ng-model="smartAppId" placeholder="Enter SmartApp Id">
+</div>
+
+<div class="content" role="main">
+  <span><h3>{{smartAppMetaDetails}}</h3></span>
+</div>
