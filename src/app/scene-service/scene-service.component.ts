@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StClientService } from '../service/st-client.service';
+import { validate as uuidValidate } from 'uuid';
+import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
 
 @Component({
   selector: 'app-scene-service',
@@ -14,14 +16,21 @@ export class SceneServiceComponent implements OnInit {
   sceneDetails: any;
   sceneId: any;
   description: any;
-  loading: boolean = true;
+  loadingMeta: boolean = true;
+  loadingScene: boolean = false;
+  public editorOptions: JsonEditorOptions;
+  @ViewChild(JsonEditorComponent, { static: false }) editor: JsonEditorComponent;
 
   constructor(
     private route: ActivatedRoute,
-    private stClient: StClientService) {}
+    private stClient: StClientService) {
+      this.editorOptions = new JsonEditorOptions();
+      this.editorOptions.mode = 'text';
+      this.editorOptions.onChange = () => console.log(this.editor.get());
+    }
 
   ngOnInit(): void {
-    this.loading = true;
+    this.loadingMeta = true;
     this.env = this.route.snapshot.params['env'];
     this.description = "Fetches all scene meta details.";
     this.getSceneMetaDetails();
@@ -35,15 +44,28 @@ export class SceneServiceComponent implements OnInit {
  }
 
  getSceneDetails(): void {
-  this.sceneDetails = 'TODO';
-  //   this.stClient.getDeviceMetaDetails(this.env).subscribe(
-  //    response => this.parseResponse(response)
-  //  )
+  if (this.sceneId === null) {
+    console.log('sceenId is null');
+    return;
   }
+  if (uuidValidate(this.sceneId) === false) {
+    console.log('deviceId is not in UUID format.');
+  }
+  this.loadingScene = true;
+  this.stClient.getSceneDetails(this.env, this.sceneId).subscribe(
+    response => this.parseSceneResponse(response)
+  );
+}
 
  parseResponse(response) {
-   this.loading = false;
+   this.loadingMeta = false;
    this.sceneMetaDetails = response;
  }
+
+ parseSceneResponse(response) {
+  console.log('Scene detail: {}', response);
+  this.loadingScene = false;
+  this.sceneDetails = response;
+}
 
 }

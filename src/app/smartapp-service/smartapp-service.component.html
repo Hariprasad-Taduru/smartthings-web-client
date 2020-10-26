@@ -1,10 +1,37 @@
 <div class="card-container">
-  <a class="card card-small" (click)='getSmartAppMetaDetails()' tabindex="0">
+  <a class="card card-small" (click)="getSmartAppDetails()" tabindex="0">
     <span><h3>Fetch SmartApp</h3></span>
   </a>
-  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <input name="smartAppId" ng-model="smartAppId" placeholder="Enter SmartApp Id">
+  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <input name="smartAppId" [(ngModel)]="smartAppId" placeholder="Enter SmartApp Id">
+</div>
+
+<div class="loading-spinner" *ngIf="loadingSmartApp">
+  <br>
+  <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
+  </mat-progress-spinner>
 </div>
 
 <div class="content" role="main">
-  <span><h3>{{smartAppMetaDetails}}</h3></span>
+  <json-editor *ngIf="smartAppDetails" class="w-100-p p-24" style="min-height: 80px;" [options]="editorOptions" [data]="smartAppDetails"></json-editor>
 </div>
+
+<div class="loading-spinner" *ngIf="loadingMeta" display:block>
+  <br>
+  <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
+  </mat-progress-spinner>
+</div>
+
+<table *ngIf="smartAppMetaDetails">
+  <thead>
+    <tr>
+      <td><b>SmartApp Name</b></td>
+      <td><b>SmartApp Id</b></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor ="let smartApp of smartAppMetaDetails;">
+      <td>{{smartApp.installedAppName}}</td>
+      <td>{{smartApp.installedAppId}}</td>
+    </tr>
+  </tbody>
+</table>

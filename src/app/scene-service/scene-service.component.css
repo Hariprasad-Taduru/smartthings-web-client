@@ -354,3 +354,6 @@ input {
   width: 30%;
   border-radius:5px;
 }
+.ace_editor.ace-jsoneditor {
+  min-height: 500px;
+}
