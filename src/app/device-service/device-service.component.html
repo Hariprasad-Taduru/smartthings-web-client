@@ -1,11 +1,21 @@
 <div class="card-container">
-  <a class="card card-small" (click)="getDeviceStatus()" tabindex="0">
+  <a class="card card-small" (click)="getDeviceDetails()" tabindex="0">
     <span><h3>Device status</h3></span>
   </a>
-  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <input name="ruleId" ng-model="deviceId" placeholder="Enter Device Id">
+  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <input name="deviceId" [(ngModel)]="deviceId" placeholder="Enter Device Id">
 </div>
 
-<div class="loading-spinner" *ngIf="loading" display:block>
+<div class="loading-spinner" *ngIf="loadingDevice">
+  <br>
+  <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
+  </mat-progress-spinner>
+</div>
+
+<div class="content" role="main">
+  <json-editor *ngIf="deviceDetails" class="w-100-p p-24" style="min-height: 80px;" [options]="editorOptions" [data]="deviceDetails"></json-editor>
+</div>
+
+<div class="loading-spinner" *ngIf="loadingMeta">
   <br>
   <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
   </mat-progress-spinner>

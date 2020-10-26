@@ -2,10 +2,20 @@
   <a class="card card-small" (click)="getSceneDetails()" tabindex="0">
     <span><h3>Fetch Scene</h3></span>
   </a>
-  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <input name="sceneId" ng-model="sceneId" placeholder="Enter Scene Id">
+  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <input name="sceneId" [(ngModel)]="sceneId" placeholder="Enter Scene Id">
 </div>
 
-<div class="loading-spinner" *ngIf="loading" display:block>
+<div class="loading-spinner" *ngIf="loadingScene">
+  <br>
+  <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
+  </mat-progress-spinner>
+</div>
+
+<div class="content" role="main">
+  <json-editor *ngIf="sceneDetails" class="w-100-p p-24" style="min-height: 80px;" [options]="editorOptions" [data]="sceneDetails"></json-editor>
+</div>
+
+<div class="loading-spinner" *ngIf="loadingMeta" display:block>
   <br>
   <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
   </mat-progress-spinner>

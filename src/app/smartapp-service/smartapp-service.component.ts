@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StClientService } from '../service/st-client.service';
+import { validate as uuidValidate } from 'uuid';
+import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
 
 @Component({
   selector: 'app-smartapp-service',
@@ -14,15 +16,21 @@ export class SmartappServiceComponent implements OnInit {
   smartAppDetails: any;
   smartAppId: any;
   description: any;
-  loading: boolean = true;
+  loadingMeta: boolean = true;
+  loadingSmartApp: boolean = false;
+  public editorOptions: JsonEditorOptions;
+  @ViewChild(JsonEditorComponent, { static: false }) editor: JsonEditorComponent;
 
   constructor(
     private route: ActivatedRoute,
-    private stClient: StClientService
-  ) { }
+    private stClient: StClientService) {
+      this.editorOptions = new JsonEditorOptions();
+      this.editorOptions.mode = 'text';
+      this.editorOptions.onChange = () => console.log(this.editor.get());
+    }
 
   ngOnInit(): void {
-    this.loading = true;
+    this.loadingMeta = true;
     this.env = this.route.snapshot.params['env'];
     this.description = "Fetches all smartapp meta details.";
     this.getSmartAppMetaDetails();
@@ -30,10 +38,34 @@ export class SmartappServiceComponent implements OnInit {
   }
 
   getSmartAppMetaDetails(): void {
-  //   this.stClient.getSceneMetaDetails(this.env).subscribe(
-  //    response => this.parseResponse(response)
-  //  );
-  this.smartAppMetaDetails = "Implementation is still in progress...";
+    this.stClient.getSmartAppMetaDetails(this.env).subscribe(
+     response => this.parseResponse(response)
+   );
  }
+
+ getSmartAppDetails(): void {
+  if (this.smartAppId === null) {
+    console.log('smartAppId is null');
+    return;
+  }
+  if (uuidValidate(this.smartAppId) === false) {
+    console.log('smartAppId is not in UUID format.');
+  }
+  this.loadingSmartApp = true;
+  this.stClient.getSmartAppDetails(this.env, this.smartAppId).subscribe(
+    response => this.parseSmartAppResponse(response)
+  );
+}
+
+ parseResponse(response) {
+   this.loadingMeta = false;
+   this.smartAppMetaDetails = response;
+ }
+
+ parseSmartAppResponse(response) {
+  console.log('SmartApp detail: {}', response);
+  this.loadingSmartApp = false;
+  this.smartAppDetails = response;
+}
 
 }
