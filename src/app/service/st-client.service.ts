@@ -15,6 +15,7 @@ export interface Location{
 export interface DeviceMeta{
   deviceId: string;
   deviceLabelName: string;
+  deviceTypeName: string;
 }
 
 export interface RuleMeta{
@@ -48,7 +49,7 @@ export class StClientService {
   // Device API
   getDeviceMetaDetails(env: string) {
     console.log(env);
-    return this.httpClient.get('http://localhost:5200/st/devicesNames?env=' + env);
+    return this.httpClient.get<DeviceMeta[]>('http://localhost:5200/st/devicesNames?env=' + env);
   }
 
   getDeviceDetails(env: string, deviceId: string) {

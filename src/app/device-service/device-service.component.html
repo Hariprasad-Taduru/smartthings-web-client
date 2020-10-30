@@ -24,14 +24,16 @@
 <table *ngIf="deviceMetaDetails">
   <thead>
     <tr>
-      <td><b>Device Name</b></td>
       <td><b>Device Id</b></td>
+      <td><b>Device Name</b></td>
+      <td><b>Device Type</b></td>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor ="let device of deviceMetaDetails;">
-      <td>{{device.deviceLabelName}}</td>
       <td>{{device.deviceId}}</td>
+      <td>{{device.deviceLabelName}}</td>
+      <td>{{device.deviceTypeName}}</td>
     </tr>
   </tbody>
 </table>
