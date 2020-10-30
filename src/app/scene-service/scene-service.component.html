@@ -24,14 +24,14 @@
 <table *ngIf="sceneMetaDetails">
   <thead>
     <tr>
-      <td><b>Scene Name</b></td>
       <td><b>Scene Id</b></td>
+      <td><b>Scene Name</b></td>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor ="let scene of sceneMetaDetails;">
-      <td>{{scene.sceneName}}</td>
       <td>{{scene.sceneId}}</td>
+      <td>{{scene.sceneName}}</td>
     </tr>
   </tbody>
 </table>

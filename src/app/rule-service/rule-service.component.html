@@ -23,14 +23,14 @@
 <table *ngIf="ruleMetaDetails">
   <thead>
     <tr>
-      <td><b>Rule Name</b></td>
       <td><b>Rule Id</b></td>
+      <td><b>Rule Name</b></td>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor ="let rule of ruleMetaDetails;">
-      <td>{{rule.ruleName}}</td>
       <td>{{rule.ruleId}}</td>
+      <td>{{rule.ruleName}}</td>
     </tr>
   </tbody>
 </table>

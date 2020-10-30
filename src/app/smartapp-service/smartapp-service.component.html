@@ -24,14 +24,14 @@
 <table *ngIf="smartAppMetaDetails">
   <thead>
     <tr>
-      <td><b>SmartApp Name</b></td>
       <td><b>SmartApp Id</b></td>
+      <td><b>SmartApp Name</b></td>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor ="let smartApp of smartAppMetaDetails;">
-      <td>{{smartApp.installedAppName}}</td>
       <td>{{smartApp.installedAppId}}</td>
+      <td>{{smartApp.installedAppName}}</td>
     </tr>
   </tbody>
 </table>
