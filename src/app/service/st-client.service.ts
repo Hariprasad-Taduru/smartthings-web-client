@@ -41,7 +41,13 @@ export class StClientService {
   constructor(private httpClient: HttpClient) { }
 
   // Location API
-  getLocationsDetails(env: string) {
+
+  getTestLocationDetails(env: string) {
+    console.log(env);
+    return this.httpClient.get<Location>('http://localhost:5200/st/testlocation?env=' + env);
+  }
+
+  getAllLocationsDetails(env: string) {
     console.log(env);
     return this.httpClient.get<Location[]>('http://localhost:5200/st/locations?env=' + env);
   }

@@ -1,13 +1,21 @@
-<div class="loading-spinner" *ngIf="loading">
+<div class="loading-spinner" *ngIf="loadingLocation">
   <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
   </mat-progress-spinner>
 </div>
-<br>
- <table *ngIf="locationService">
+
+<div class="card-container">
+  <a class="card card-small" (click)="getLocationsDetails()" tabindex="0">
+    <span><h3>List all locations</h3></span>
+  </a>
+</div>
+<div *ngIf="testLocation">
+  <h3 style="color:blue; margin-left: 11em">Test Location:</h3>
+</div>
+<table *ngIf="testLocation">
   <thead>
     <tr>
-      <td><b>Location Name</b></td>
       <td><b>Location Id</b></td>
+      <td><b>Location Name</b></td>
       <td><b>Latitude</b></td>
       <td><b>Longitude</b></td>
       <td><b>Radius</b></td>
@@ -17,9 +25,43 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor ="let location of locationService;">
-      <td>{{location.name}}</td>
+    <tr>
+      <td>{{testLocation.locationId}}</td>
+      <td>{{testLocation.name}}</td>
+      <td>{{testLocation.latitude}}</td>
+      <td>{{testLocation.longitude}}</td>
+      <td>{{testLocation.regionRadius}}</td>
+      <td>{{testLocation.temperatureScale}}</td>
+      <td>{{testLocation.timeZoneId}}</td>
+      <td>{{testLocation.locale}}</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<div *ngIf="allLocations">
+  <h3 style="color:blue; margin-left: 11em">All Locations:</h3>
+</div>
+<div class="loading-spinner" style = "height: 120vh;" *ngIf="loadingAllLocations">
+  <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
+  </mat-progress-spinner>
+</div>
+<table *ngIf="allLocations">
+  <thead>
+    <tr>
+      <td><b>Location Id</b></td>
+      <td><b>Location Name</b></td>
+      <td><b>Latitude</b></td>
+      <td><b>Longitude</b></td>
+      <td><b>Radius</b></td>
+      <td><b>Temp Unit</b></td>
+      <td><b>Time Zone</b></td>
+      <td><b>Locale</b></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor ="let location of allLocations;">
       <td>{{location.locationId}}</td>
+      <td>{{location.name}}</td>
       <td>{{location.latitude}}</td>
       <td>{{location.longitude}}</td>
       <td>{{location.regionRadius}}</td>
