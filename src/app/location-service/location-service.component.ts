@@ -10,29 +10,43 @@ import { StClientService } from '../service/st-client.service';
 export class LocationServiceComponent implements OnInit {
   env = '';
 
-  locationService: any;
+  testLocation: any;
   description: any;
-  loading: boolean = true;
+  loadingLocation: boolean = true;
+  loadingAllLocations: boolean = false;
+  allLocations: any;
 
   constructor(private route: ActivatedRoute,
               private stClient: StClientService) {}
 
   ngOnInit(): void {
-    this.loading = true;
+    this.loadingLocation = true;
+    this.loadingAllLocations = false;
     this.env = this.route.snapshot.params['env'];
-    this.description = "Fetches all location details.";
-    this.getLocationsDetails();
+    this.description = "Fetching test location details.";
+    this.getTestLocationDetails();
     console.log('LocationServiceComponent ngOnInit() is called.');
   }
 
+  getTestLocationDetails(): void {
+    this.stClient.getTestLocationDetails(this.env).subscribe(
+      response => this.parseTestLocationResponse(response)
+    );
+  }
   getLocationsDetails(): void {
-     this.stClient.getLocationsDetails(this.env).subscribe(
+     this.loadingAllLocations = true;
+     this.stClient.getAllLocationsDetails(this.env).subscribe(
       response => this.parseResponse(response)
     );
   }
 
+  parseTestLocationResponse(response) {
+    this.loadingLocation = false;
+    this.testLocation = response;
+  }
+
   parseResponse(response) {
-    this.loading = false;
-    this.locationService = response;
+    this.loadingAllLocations = false;
+    this.allLocations = response;
   }
 }
