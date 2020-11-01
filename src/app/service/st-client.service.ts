@@ -23,6 +23,11 @@ export interface RuleMeta{
   ruleName: string;
 }
 
+export interface OcfRuleMeta{
+  ocfRuleId: string;
+  ocfRuleName: string;
+}
+
 export interface SceneMeta{
   sceneId: string;
   sceneName: string;
@@ -95,4 +100,25 @@ export class StClientService {
     console.log(env);
     return this.httpClient.get('http://localhost:5200/st/smartAppDetails?appId=' + appId + '&env=' + env);
   }
+
+  // OCF Stuff
+    getOCFRuleMetaDetails(env: string) {
+      console.log(env);
+      return this.httpClient.get<OcfRuleMeta[]>('http://localhost:5200/st/ocfRulesNames?env=' + env);
+    }
+
+    getOCFRuleDetails(env: string, ruleId: string) {
+      console.log(env);
+      return this.httpClient.get('http://localhost:5200/st/ocfRuleDetails?ruleId=' + ruleId + '&env=' + env);
+    }
+
+    getOCFSceneMetaDetails(env: string) {
+      console.log(env);
+      return this.httpClient.get<OcfRuleMeta[]>('http://localhost:5200/st/ocfScenesNames?env=' + env);
+    }
+
+    getOCFSceneDetails(env: string, ruleId: string) {
+      console.log(env);
+      return this.httpClient.get('http://localhost:5200/st/ocfSceneDetails?sceneId=' + ruleId + '&env=' + env);
+    }
 }
