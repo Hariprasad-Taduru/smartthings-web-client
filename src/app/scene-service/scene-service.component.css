@@ -1,3 +1,5 @@
+@import "~jsoneditor/dist/jsoneditor.min.css";
+
 :host {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
@@ -78,7 +80,7 @@ svg.material-icons:not(:last-child) {
   flex-wrap: wrap;
   justify-content: left;
   margin-top: 0px;
-  margin-left:30%;
+  margin-left:13%;
 }
 
 .card {
@@ -95,6 +97,7 @@ svg.material-icons:not(:last-child) {
   align-items: center;
   transition: all 0.2s ease-in-out;
   line-height: 24px;
+  margin-bottom: 0px;
 }
 
 .card-container .card:not(:last-child) {
@@ -286,16 +289,17 @@ svg#clouds {
 }
 
 
-
 body {
   padding: 14px;
   text-align: center;
 }
 
 table {
-  width: 50%;
+  width: 40%;
   margin: 20px auto;
   table-layout: auto;
+  float: left;
+  margin-left: 2%;
 }
 
 .fixed {
@@ -346,14 +350,14 @@ td {
   stroke: red;
 }
 
-
 input {
   padding: 8px;
   margin:1px 0;
   height:21px;
-  width: 30%;
+  width: 25%;
   border-radius:5px;
 }
+
 .ace_editor.ace-jsoneditor {
   min-height: 500px;
 }

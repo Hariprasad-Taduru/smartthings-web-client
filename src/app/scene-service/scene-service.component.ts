@@ -14,7 +14,10 @@ export class SceneServiceComponent implements OnInit {
   env = '';
   sceneMetaDetails: any;
   sceneDetails: any;
+  ocfSceneDetails: any;
   sceneId: any;
+  ocfSceneId: any;
+  sceneOcfMetaDetails: any;
   description: any;
   loadingMeta: boolean = true;
   loadingScene: boolean = false;
@@ -31,9 +34,11 @@ export class SceneServiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadingMeta = true;
+    this.ocfSceneId = null;
     this.env = this.route.snapshot.params['env'];
     this.description = "Fetches all scene meta details.";
     this.getSceneMetaDetails();
+    this.getOcfSceneMetaDetails();
     console.log('SceneServiceComponent ngOnInit() is called.');
   }
 
@@ -68,4 +73,35 @@ export class SceneServiceComponent implements OnInit {
   this.sceneDetails = response;
 }
 
+// OCF Stuff
+getOcfSceneMetaDetails(): void {
+  this.stClient.getOCFSceneMetaDetails(this.env).subscribe(
+    response => this.parseOcfSceneMetaResponse(response)
+  );
+}
+parseOcfSceneMetaResponse(response) {
+  console.log('OCF Scenes: {}', response);
+  this.loadingMeta = false;
+  this.sceneOcfMetaDetails = response;
+}
+
+getOcfSceneDetails(): void {
+  if (this.ocfSceneId === null) {
+    console.log('ocfSceneId is null');
+    return;
+  }
+  if (uuidValidate(this.ocfSceneId) === false) {
+    console.log('ocfSceneId is not in UUID format.');
+  }
+  this.loadingScene = true;
+  this.stClient.getOCFSceneDetails(this.env, this.ocfSceneId).subscribe(
+    response => this.parseOcfSceneResponse(response)
+  );
+}
+
+parseOcfSceneResponse(response) {
+  console.log('OCF Scene detail: {}', response);
+  this.loadingScene = false;
+  this.ocfSceneDetails = response;
+}
 }

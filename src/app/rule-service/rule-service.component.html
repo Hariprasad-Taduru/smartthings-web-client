@@ -1,17 +1,26 @@
 <div class="card-container">
-  <a class="card card-small" (click)="getRuleDetails()" tabindex="0">
-    <span><h3>Fetch Rule</h3></span>
+  <a class="card card-small" (click)="getOcfRuleDetails()" tabindex="0">
+    <span><h3>Get <b>OCF</b> Rule</h3></span>
   </a>
-  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <input name="ruleId" [(ngModel)]="ruleId" placeholder="Enter Rule Id">
+  &nbsp;&nbsp;&nbsp; <input name="ocfRuleId" [(ngModel)]="ocfRuleId" placeholder="Enter OCF Rule Id">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a class="card card-small" (click)="getRuleDetails()" tabindex="0">
+    <span><h3>Get <b>ST</b> Rule</h3></span>
+  </a>
+  &nbsp;&nbsp;&nbsp; <input name="ruleId" [(ngModel)]="ruleId" placeholder="Enter ST Rule Id">
 </div>
 
 <div class="loading-spinner" *ngIf="loadingRule">
   <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
   </mat-progress-spinner>
 </div>
+<br>
+<div class="content" role="main" *ngIf="ocfRuleDetails">
+  <h3 style="text-align:center; color:blue;">OCF Rule details:</h3> <json-editor *ngIf="ocfRuleDetails" class="w-100-p p-24" style="min-height: 80px;" [options]="editorOptions" [data]="ocfRuleDetails"></json-editor>
+</div>
 
-<div class="content" role="main">
-  <json-editor *ngIf="ruleDetails" class="w-100-p p-24" style="min-height: 80px;" [options]="editorOptions" [data]="ruleDetails"></json-editor>
+<div class="content" role="main" *ngIf="ruleDetails">
+  <h3 style="text-align:center; color:green;">ST Rule details:</h3> <json-editor *ngIf="ruleDetails" class="w-100-p p-24" style="min-height: 80px;" [options]="editorOptions" [data]="ruleDetails"></json-editor>
 </div>
 
 <div class="loading-spinner" *ngIf="loadingMeta">
@@ -20,11 +29,28 @@
   </mat-progress-spinner>
 </div>
 
-<table *ngIf="ruleMetaDetails">
+<div style="margin-left: 160px; margin-top: 0px;">
+<table *ngIf="ruleOcfMetaDetails">
+  <caption style="text-align:center; color:blue;"><h3>OCF Rules</h3></caption>
   <thead>
     <tr>
-      <td><b>Rule Id</b></td>
-      <td><b>Rule Name</b></td>
+      <td><b>OCF Rule Id</b></td>
+      <td><b>OCF Rule Name</b></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor ="let rule of ruleOcfMetaDetails;">
+      <td>{{rule.ocfRuleId}}</td>
+      <td>{{rule.ocfRuleName}}</td>
+    </tr>
+  </tbody>
+</table>
+<table *ngIf="ruleMetaDetails">
+  <caption style="text-align:center; color:green;"><h3>ST Rules</h3></caption>
+  <thead>
+    <tr>
+      <td><b>ST Rule Id</b></td>
+      <td><b>ST Rule Name</b></td>
     </tr>
   </thead>
   <tbody>
@@ -34,3 +60,5 @@
     </tr>
   </tbody>
 </table>
+</div>
+
