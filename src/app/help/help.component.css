@@ -295,11 +295,11 @@ body {
 }
 
 table {
-  width: 41%;
+  width: 75%;
   margin: 20px auto;
   table-layout: auto;
   float: left;
-  margin-left: 2%;
+  margin-left: 6%;
 }
 
 .fixed {

@@ -43,6 +43,10 @@ export class AppComponent {
     this.router.navigate(['apps', this.env]);
   }
 
+  handleHelpButton() {
+    this.router.navigate(['help']);
+  }
+
   handleHomeButton() {
     this.router.navigate(['']);
   }
