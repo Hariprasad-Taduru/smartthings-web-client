@@ -2,12 +2,12 @@
   <a class="card card-small" (click)="getOcfRuleDetails()" tabindex="0">
     <span><h3>Get <b>OCF</b> Rule</h3></span>
   </a>
-  &nbsp;&nbsp;&nbsp; <input name="ocfRuleId" [(ngModel)]="ocfRuleId" placeholder="Enter OCF Rule Id">
+  &nbsp;&nbsp;&nbsp; <input name="ocfRuleId" [(ngModel)]="ocfRuleId" placeholder="Enter OCF based rule id">
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a class="card card-small" (click)="getRuleDetails()" tabindex="0">
-    <span><h3>Get <b>ST</b> Rule</h3></span>
+    <span><h3>Get <b>V2020</b> Rule</h3></span>
   </a>
-  &nbsp;&nbsp;&nbsp; <input name="ruleId" [(ngModel)]="ruleId" placeholder="Enter ST Rule Id">
+  &nbsp;&nbsp;&nbsp; <input name="ruleId" [(ngModel)]="ruleId" placeholder="Enter CAPABILITY based rule id">
 </div>
 
 <div class="loading-spinner" *ngIf="loadingRule">
@@ -46,11 +46,11 @@
   </tbody>
 </table>
 <table *ngIf="ruleMetaDetails">
-  <caption style="text-align:center; color:green;"><h3>ST Rules</h3></caption>
+  <caption style="text-align:center; color:green;"><h3>Capability Rules</h3></caption>
   <thead>
     <tr>
-      <td><b>ST Rule Id</b></td>
-      <td><b>ST Rule Name</b></td>
+      <td><b>V2020 Rule Id</b></td>
+      <td><b>V2020 Rule Name</b></td>
     </tr>
   </thead>
   <tbody>

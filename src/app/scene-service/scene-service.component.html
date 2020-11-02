@@ -5,7 +5,7 @@
   &nbsp;&nbsp;&nbsp; <input name="ocfSceneId" [(ngModel)]="ocfSceneId" placeholder="Enter OCF Scene Id">
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a class="card card-small" (click)="getSceneDetails()" tabindex="0">
-    <span><h3>Get <b>ST</b> Scene</h3></span>
+    <span><h3>Get <b>V2020</b> Scene</h3></span>
   </a>
   &nbsp;&nbsp;&nbsp; <input name="sceneId" [(ngModel)]="sceneId" placeholder="Enter ST Scene Id">
 </div>
@@ -46,11 +46,11 @@
   </tbody>
 </table>
 <table *ngIf="sceneMetaDetails">
-  <caption style="text-align:center; color:green;"><h3>ST Scenes</h3></caption>
+  <caption style="text-align:center; color:green;"><h3>Capability Scenes</h3></caption>
   <thead>
     <tr>
-      <td><b>ST Scene Id</b></td>
-      <td><b>ST Scene Name</b></td>
+      <td><b>V2020 Scene Id</b></td>
+      <td><b>V2020 Scene Name</b></td>
     </tr>
   </thead>
   <tbody>

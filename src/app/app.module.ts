@@ -15,6 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { SmartappServiceComponent } from './smartapp-service/smartapp-service.component';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgJsonEditorModule } from 'ang-jsoneditor';
     DeviceServiceComponent,
     RuleServiceComponent,
     SceneServiceComponent,
-    SmartappServiceComponent
+    SmartappServiceComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
