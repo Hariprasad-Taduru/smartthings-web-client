@@ -1,13 +1,13 @@
 <div class="card-container">
   <a class="card card-small" (click)="getOcfSceneDetails()" tabindex="0">
-    <span><h3>Get <b>OCF</b> Scene</h3></span>
+    <span><h3>Get OCF Scene</h3></span>
   </a>
-  &nbsp;&nbsp;&nbsp; <input name="ocfSceneId" [(ngModel)]="ocfSceneId" placeholder="Enter OCF Scene Id">
+  &nbsp;&nbsp;&nbsp; <input name="ocfSceneId" [(ngModel)]="ocfSceneId" placeholder="Enter OCF based Scene Id">
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a class="card card-small" (click)="getSceneDetails()" tabindex="0">
-    <span><h3>Get <b>V2020</b> Scene</h3></span>
+    <span><h3>Capability Scene</h3></span>
   </a>
-  &nbsp;&nbsp;&nbsp; <input name="sceneId" [(ngModel)]="sceneId" placeholder="Enter ST Scene Id">
+  &nbsp;&nbsp;&nbsp; <input name="sceneId" [(ngModel)]="sceneId" placeholder="Enter CAPABILITY based Scene Id">
 </div>
 
 <div class="loading-spinner" *ngIf="loadingScene">
@@ -20,7 +20,7 @@
 </div>
 
 <div class="content" role="main" *ngIf="sceneDetails">
-  <h3 style="text-align:center; color:green;">ST Scene details:</h3> <json-editor *ngIf="sceneDetails" class="w-100-p p-24" style="min-height: 80px;" [options]="editorOptions" [data]="sceneDetails"></json-editor>
+  <h3 style="text-align:center; color:green;">Capability Scene details:</h3> <json-editor *ngIf="sceneDetails" class="w-100-p p-24" style="min-height: 80px;" [options]="editorOptions" [data]="sceneDetails"></json-editor>
 </div>
 
 <div class="loading-spinner" *ngIf="loadingMeta">
@@ -49,8 +49,8 @@
   <caption style="text-align:center; color:green;"><h3>Capability Scenes</h3></caption>
   <thead>
     <tr>
-      <td><b>V2020 Scene Id</b></td>
-      <td><b>V2020 Scene Name</b></td>
+      <td><b>Capability Scene Id</b></td>
+      <td><b>Capability Scene Name</b></td>
     </tr>
   </thead>
   <tbody>
