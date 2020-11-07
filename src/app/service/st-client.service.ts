@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { stringify } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 
 export interface Location{
@@ -66,6 +67,13 @@ export class StClientService {
   getDeviceDetails(env: string, deviceId: string) {
     console.log(env);
     return this.httpClient.get('http://localhost:5200/st/deviceDetails?deviceId=' + deviceId +  '&env=' + env);
+  }
+
+  postDeviceCommand(env: string, deviceId: string, component: string, capability: string, attribute: string) {
+    console.log(env);
+    var queryPatamer: string;
+    queryPatamer = "deviceId=" + deviceId + "&component=" + component + "&capability=" + capability + "&attribute=" + attribute;
+    return this.httpClient.get('http://localhost:5200/st/deviceCommands?' + queryPatamer +  '&env=' + env);
   }
 
   // Rule API

@@ -21,9 +21,20 @@ export class DeviceServiceComponent implements OnInit {
   description: any;
   loadingMeta: boolean = true;
   loadingDevice: boolean = false;
+  devices: any;
+  deviceComponent: any;
+  deviceCapability: any;
+  deviceAttribute: any;
+  componentArray: string[];
+  capabilityArray: string[];
+  attributeArray: string[];
   public editorOptions: JsonEditorOptions;
   @ViewChild(JsonEditorComponent, { static: false }) editor: JsonEditorComponent;
 
+  ignoreCapabilities = [
+    "configuration", "refresh", "actuator", "healthCheck", "battery", "sensor", "temperatureMeasurement",
+    "contactSensor", "threeAxis", "accelerationSensor", "light"
+  ];
   constructor(private route: ActivatedRoute,
     private httpClient: HttpClient,
     private stClient: StClientService) {
@@ -34,6 +45,8 @@ export class DeviceServiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.deviceId = null;
+    this.deviceComponent = null;
+    this.deviceCapability = null;
     this.loadingMeta = true;
     this.loadingDevice = false;
     this.env = this.route.snapshot.params['env'];
@@ -65,6 +78,7 @@ export class DeviceServiceComponent implements OnInit {
  parseDeviceMetaResponse(response) {
    this.loadingMeta = false;
    this.deviceMetaDetails = response;
+   this.devices = response;
  }
 
  parseDeviceResponse(response) {
@@ -73,4 +87,75 @@ export class DeviceServiceComponent implements OnInit {
   this.deviceDetails = response;
 }
 
+populateComponents() {
+  console.log("populateComponents() called.");
+  console.log("devices", this.devices);
+  this.attributeArray = null;
+  this.componentArray = new Array();
+  this.capabilityArray = new Array();
+  for (var index in this.devices) {
+    if (this.devices[index].deviceId === this.deviceId) {
+      var selectedDevice = this.devices[index];
+
+      console.log("deviceId: {}", selectedDevice.deviceSnapshot.deviceId);
+      for (var componentIndex in selectedDevice.deviceSnapshot.components) {
+        //console.log("device component: {}", this.devices[index].deviceSnapshot.components[0].id[1]);
+        // this.componentArray[index] = this.devices[index].deviceSnapshot.components[0].id;
+
+        console.log("component: {}", selectedDevice.deviceSnapshot.components[componentIndex].id);
+        this.componentArray[componentIndex] = selectedDevice.deviceSnapshot.components[componentIndex].id;
+
+        //Capabilities
+        var i = 0;
+        console.log("all capabilities: {}", selectedDevice.deviceSnapshot.components[componentIndex].capabilities);
+        for (var capIndex in selectedDevice.deviceSnapshot.components[componentIndex].capabilities) {
+          console.log(" capIndex: {}, capability: {}", capIndex, selectedDevice.deviceSnapshot.components[componentIndex].capabilities[capIndex]);
+          var capbilityId = selectedDevice.deviceSnapshot.components[componentIndex].capabilities[capIndex].id;
+          if (this.ignoreCapabilities.indexOf(capbilityId) === -1) {
+            this.capabilityArray[i] = selectedDevice.deviceSnapshot.components[componentIndex].capabilities[capIndex].id;
+            i = i + 1;
+          }
+        }
+        break;
+      }
+    }
+  }
+
+}
+
+populateCapabilities() {
+
+}
+populateAttributes() {
+  this.attributeArray = null;
+ console.log("selected capability: {}", this.deviceCapability);
+ this.attributeArray = new Array();
+ if (this.deviceCapability === "switch") {
+  this.attributeArray.push('on');
+  this.attributeArray.push('off');
+ } else if (this.deviceCapability === "switchLevel") {
+  this.attributeArray.push('');
+  this.attributeArray.push('20');
+  this.attributeArray.push('40');
+  this.attributeArray.push('60');
+  this.attributeArray.push('80');
+  this.attributeArray.push('100');
+ }
+}
+
+// device command
+onCommandSubmit() {
+  console.log("Device command called.");
+  console.log("deviceId: ", this.deviceId, );
+  console.log("component:", this.deviceComponent);
+  console.log("capability:", this.deviceCapability);
+  console.log("attribute:", this.deviceAttribute);
+
+  this.stClient.postDeviceCommand(this.env, this.deviceId, this.deviceComponent, this.deviceCapability, this.deviceAttribute).subscribe(
+    response => this.parseDeviceCommandResponse(response)
+  );
+}
+parseDeviceCommandResponse(response) {
+  console.log("device command response: ", response);
+}
 }

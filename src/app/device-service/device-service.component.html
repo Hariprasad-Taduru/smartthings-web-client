@@ -5,6 +5,7 @@
   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <input name="deviceId" [(ngModel)]="deviceId" placeholder="Enter Device Id">
 </div>
 
+
 <div class="loading-spinner" *ngIf="loadingDevice">
   <br>
   <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
@@ -20,6 +21,40 @@
   <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
   </mat-progress-spinner>
 </div>
+
+<!-- Start -->
+<div *ngIf="deviceMetaDetails">
+  <!-- <h3 style="margin-left: 240px;"> Send Command </h3> -->
+    <form id = "eventSubmit" #eventSubmit = "ngForm" (ngSubmit) = "onCommandSubmit()">
+      <fieldset>
+        <label><b>Device Command</b></label>&nbsp;
+        <label>Select device *</label>&nbsp;
+        <select [(ngModel)]= "deviceId" name= "deviceId" (ngModelChange)="populateComponents()" required>
+          <option [ngValue]="device.deviceId" *ngFor = "let device of devices">{{device.deviceLabelName}}</option>
+        </select> &nbsp; &nbsp; <br> <br>
+
+        <label>Component *</label>&nbsp;
+        <select [(ngModel)]="deviceComponent" name= "component" (ngModelChange)="populateCapabilities()" required>
+          <option [ngValue]="component" *ngFor = "let component of componentArray">{{component}}</option>
+        </select> &nbsp; &nbsp;
+
+        <label>Capability *</label>&nbsp;
+        <select [(ngModel)]="deviceCapability" name= "capability" (ngModelChange)="populateAttributes()" required>
+          <option [ngValue]="capability" *ngFor = "let capability of capabilityArray">{{capability}}</option>
+        </select> &nbsp; &nbsp;
+
+        <label>Attribute *</label>&nbsp;
+        <select [(ngModel)]="deviceAttribute" name="attribute" required>
+          <option [ngValue]="attribute" *ngFor = "let attribute of attributeArray">{{attribute}}</option>
+        </select> &nbsp; &nbsp;
+
+        <button class = "button" align = "center" type = "submit" value = "Submit" [disabled]="!eventSubmit.valid">Submit</button>
+
+      </fieldset>
+    </form>
+</div>
+<br>
+<!-- End -->
 
 <table *ngIf="deviceMetaDetails">
   <thead>
