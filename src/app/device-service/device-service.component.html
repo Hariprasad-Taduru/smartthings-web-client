@@ -27,7 +27,7 @@
   <!-- <h3 style="margin-left: 240px;"> Send Command </h3> -->
     <form id = "eventSubmit" #eventSubmit = "ngForm" (ngSubmit) = "onCommandSubmit()">
       <fieldset>
-        <label><b>Device Command</b></label>&nbsp;
+        <label><b>Device Command</b></label>&nbsp;&nbsp;&nbsp;
         <label>Select device *</label>&nbsp;
         <select [(ngModel)]= "deviceId" name= "deviceId" (ngModelChange)="populateComponents()" required>
           <option [ngValue]="device.deviceId" *ngFor = "let device of devices">{{device.deviceLabelName}}</option>
@@ -43,12 +43,24 @@
           <option [ngValue]="capability" *ngFor = "let capability of capabilityArray">{{capability}}</option>
         </select> &nbsp; &nbsp;
 
-        <label>Attribute *</label>&nbsp;
+        <label>Command *</label>&nbsp;
         <select [(ngModel)]="deviceAttribute" name="attribute" required>
           <option [ngValue]="attribute" *ngFor = "let attribute of attributeArray">{{attribute}}</option>
         </select> &nbsp; &nbsp;
 
+        <label>Argument</label>&nbsp;
+        <select [(ngModel)]="commandArgument" name="attribute" required>
+          <option [ngValue]="attribute" *ngFor = "let attribute of argumentArray">{{attribute}}</option>
+        </select> &nbsp; &nbsp;
+
         <button class = "button" align = "center" type = "submit" value = "Submit" [disabled]="!eventSubmit.valid">Submit</button>
+        <br> <br>
+        <div class="loading-spinner" *ngIf="loadingCommand">
+          <br> <br> <br> <br> <br> <br> <br> <br> <br>
+          <mat-progress-spinner mode="indeterminate" color="primary"  diameter="30" strokeWidth="4">
+          </mat-progress-spinner>
+        </div>
+        <p style="text-align: center; color: green;" *ngIf="deviceCommandResponse"><b>{{deviceCommandResponse}}</b></p>
 
       </fieldset>
     </form>

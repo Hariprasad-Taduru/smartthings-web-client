@@ -361,13 +361,13 @@ input {
 }
 
 fieldset {
-  width: 700px;
+  width: 873px;
   box-sizing: content-box;
   margin:1px 0;
-  margin-left: 350px;
+  margin-left: 242px;
   padding: 10px;
   border-radius:5px;
-  height: 70px;
+  height: 120px;
 }
 .button {
   border: none;
