@@ -359,3 +359,26 @@ input {
   height: 141px;
   width: 680px;
 }
+
+fieldset {
+  width: 700px;
+  box-sizing: content-box;
+  margin:1px 0;
+  margin-left: 350px;
+  padding: 10px;
+  border-radius:5px;
+  height: 70px;
+}
+.button {
+  border: none;
+  color: white;
+  padding: 7px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius:5px;
+}
+.button {background-color: #1976d2;}
