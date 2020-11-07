@@ -72,7 +72,7 @@ export class StClientService {
   postDeviceCommand(env: string, deviceId: string, component: string, capability: string, attribute: string) {
     console.log(env);
     var queryPatamer: string;
-    queryPatamer = "deviceId=" + deviceId + "&component=" + component + "&capability=" + capability + "&command=" + attribute;
+    queryPatamer = "deviceId=" + deviceId + "&component=" + component + "&capability=" + capability + "&command=" + attribute + "&argument=";
     return this.httpClient.get('http://localhost:5200/st/deviceCommands?' + queryPatamer +  '&env=' + env);
   }
 

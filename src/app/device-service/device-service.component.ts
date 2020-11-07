@@ -21,13 +21,17 @@ export class DeviceServiceComponent implements OnInit {
   description: any;
   loadingMeta: boolean = true;
   loadingDevice: boolean = false;
+  loadingCommand: boolean = false;
   devices: any;
   deviceComponent: any;
   deviceCapability: any;
   deviceAttribute: any;
+  commandArgument: any;
   componentArray: string[];
   capabilityArray: string[];
   attributeArray: string[];
+  argumentArray: string[];
+  deviceCommandResponse: any;
   public editorOptions: JsonEditorOptions;
   @ViewChild(JsonEditorComponent, { static: false }) editor: JsonEditorComponent;
 
@@ -49,6 +53,8 @@ export class DeviceServiceComponent implements OnInit {
     this.deviceCapability = null;
     this.loadingMeta = true;
     this.loadingDevice = false;
+    this.loadingCommand = false;
+    this.deviceCommandResponse = null;
     this.env = this.route.snapshot.params['env'];
     this.description = "Fetches all device meta details.";
     this.getDeviceMetaDetails();
@@ -88,6 +94,7 @@ export class DeviceServiceComponent implements OnInit {
 }
 
 populateComponents() {
+  this.deviceCommandResponse = null;
   console.log("populateComponents() called.");
   console.log("devices", this.devices);
   this.attributeArray = null;
@@ -145,6 +152,8 @@ populateAttributes() {
 
 // device command
 onCommandSubmit() {
+  this.loadingCommand = true;
+  this.deviceCommandResponse = null;
   console.log("Device command called.");
   console.log("deviceId: ", this.deviceId, );
   console.log("component:", this.deviceComponent);
@@ -156,6 +165,13 @@ onCommandSubmit() {
   );
 }
 parseDeviceCommandResponse(response) {
-  console.log("device command response: ", response);
+  this.deviceCommandResponse = null;
+  this.loadingCommand = false;
+  console.log("device command response: {}", response);
+  if (response.commandResponse === "success") {
+    this.deviceCommandResponse = "Command execution is successful.";
+  } else {
+    this.deviceCommandResponse = "Command execution is failed.";
+  }
 }
 }
