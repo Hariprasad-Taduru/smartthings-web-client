@@ -39,29 +39,28 @@
         </select> &nbsp; &nbsp;
 
         <label>Capability *</label>&nbsp;
-        <select [(ngModel)]="deviceCapability" name= "capability" (ngModelChange)="populateAttributes()" required>
+        <select [(ngModel)]="deviceCapability" name= "capability" (ngModelChange)="populateCommands()" required>
           <option [ngValue]="capability" *ngFor = "let capability of capabilityArray">{{capability}}</option>
         </select> &nbsp; &nbsp;
 
         <label>Command *</label>&nbsp;
-        <select [(ngModel)]="deviceAttribute" name="attribute" required>
-          <option [ngValue]="attribute" *ngFor = "let attribute of attributeArray">{{attribute}}</option>
+        <select [(ngModel)]="deviceCommand" name="command" (ngModelChange)="populateArguments()" required>
+          <option [ngValue]="command" *ngFor = "let command of commandArray">{{command}}</option>
         </select> &nbsp; &nbsp;
 
-        <label>Argument</label>&nbsp;
-        <select [(ngModel)]="commandArgument" name="attribute" required>
+        <label *ngIf="argumentArray">Argument</label>&nbsp;
+        <select *ngIf="argumentArray" [(ngModel)]="commandArgument" name="argument">
           <option [ngValue]="attribute" *ngFor = "let attribute of argumentArray">{{attribute}}</option>
         </select> &nbsp; &nbsp;
 
         <button class = "button" align = "center" type = "submit" value = "Submit" [disabled]="!eventSubmit.valid">Submit</button>
-        <br> <br>
+        <br>
         <div class="loading-spinner" *ngIf="loadingCommand">
-          <br> <br> <br> <br> <br> <br> <br> <br> <br>
+          <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
           <mat-progress-spinner mode="indeterminate" color="primary"  diameter="30" strokeWidth="4">
           </mat-progress-spinner>
         </div>
-        <p style="text-align: center; color: green;" *ngIf="deviceCommandResponse"><b>{{deviceCommandResponse}}</b></p>
-
+        <h3 style="text-align: center; color: blue;" *ngIf="deviceCommandResponse">{{deviceCommandResponse}}</h3>
       </fieldset>
     </form>
 </div>
