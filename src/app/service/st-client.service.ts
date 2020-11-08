@@ -69,10 +69,15 @@ export class StClientService {
     return this.httpClient.get('http://localhost:5200/st/deviceDetails?deviceId=' + deviceId +  '&env=' + env);
   }
 
-  postDeviceCommand(env: string, deviceId: string, component: string, capability: string, attribute: string) {
+  postDeviceCommand(env: string, deviceId: string, component: string, capability: string, command: string, argument: string, isSimulatedDevice: boolean) {
     console.log(env);
+    var simulated = "0";
+    if (isSimulatedDevice === true) {
+      simulated = "1";
+    }
     var queryPatamer: string;
-    queryPatamer = "deviceId=" + deviceId + "&component=" + component + "&capability=" + capability + "&command=" + attribute + "&argument=";
+    queryPatamer = "deviceId=" + deviceId + "&component=" + component + "&capability=" + capability + "&command=" + command + "&argument=" + argument + "&isSimulatedDevice=" + simulated;
+    console.log("Query: ", queryPatamer);
     return this.httpClient.get('http://localhost:5200/st/deviceCommands?' + queryPatamer +  '&env=' + env);
   }
 

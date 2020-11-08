@@ -25,20 +25,27 @@ export class DeviceServiceComponent implements OnInit {
   devices: any;
   deviceComponent: any;
   deviceCapability: any;
-  deviceAttribute: any;
+  deviceCommand: any;
   commandArgument: any;
   componentArray: string[];
   capabilityArray: string[];
-  attributeArray: string[];
+  commandArray: string[];
   argumentArray: string[];
   deviceCommandResponse: any;
+  isSimulatedDevice: boolean = false;
   public editorOptions: JsonEditorOptions;
   @ViewChild(JsonEditorComponent, { static: false }) editor: JsonEditorComponent;
 
   ignoreCapabilities = [
-    "configuration", "refresh", "actuator", "healthCheck", "battery", "sensor", "temperatureMeasurement",
-    "contactSensor", "threeAxis", "accelerationSensor", "light"
+    "configuration", "refresh", "actuator", "healthCheck", "battery", "sensor",
+    "threeAxis", "accelerationSensor", "light"
   ];
+
+  simulatedDeviceTypeNames = [
+    "Simulated Motion Sensor", "Simulated Contact Sensor", "Simulated Presence Sensor", "Simulated Smoke Alarm",
+    "Simulated Temperature Sensor"
+  ];
+
   constructor(private route: ActivatedRoute,
     private httpClient: HttpClient,
     private stClient: StClientService) {
@@ -55,6 +62,7 @@ export class DeviceServiceComponent implements OnInit {
     this.loadingDevice = false;
     this.loadingCommand = false;
     this.deviceCommandResponse = null;
+    this.isSimulatedDevice = false;
     this.env = this.route.snapshot.params['env'];
     this.description = "Fetches all device meta details.";
     this.getDeviceMetaDetails();
@@ -93,11 +101,132 @@ export class DeviceServiceComponent implements OnInit {
   this.deviceDetails = response;
 }
 
+reset() {
+  this.isSimulatedDevice = false;
+  this.deviceComponent = null;
+  this.deviceCapability = null;
+  this.deviceCommand = null;
+  this.commandArgument = null;
+  this.commandArray = null;
+  this.componentArray = null;
+  this.capabilityArray = null;
+  this.argumentArray = null;
+ }
+
 populateComponents() {
-  this.deviceCommandResponse = null;
   console.log("populateComponents() called.");
+  this.reset();
+
+  this.componentArray = new Array();
+
+  for (var index in this.devices) {
+    if (this.devices[index].deviceId === this.deviceId) {
+      var selectedDevice = this.devices[index];
+
+      console.log("deviceId: {}", selectedDevice.deviceSnapshot.deviceId);
+      if (this.simulatedDeviceTypeNames.indexOf(selectedDevice.deviceTypeName) !== -1) {
+        this.isSimulatedDevice = true;
+      }
+      for (var componentIndex in selectedDevice.deviceSnapshot.components) {
+        console.log("component: {}", selectedDevice.deviceSnapshot.components[componentIndex].id);
+        this.componentArray[componentIndex] = selectedDevice.deviceSnapshot.components[componentIndex].id;
+      }
+    }
+  }
+
+}
+
+populateCapabilities() {
+  console.log("populateCapabilities() called.");
+  this.capabilityArray = null;
+  this.commandArray = null;
+  this.argumentArray = null;
+  this.capabilityArray = new Array();
+
+  for (var index in this.devices) {
+    if (this.devices[index].deviceId === this.deviceId) {
+      var selectedDevice = this.devices[index];
+
+      for (var componentIndex in selectedDevice.deviceSnapshot.components) {
+        //console.log("device component: {}", this.devices[index].deviceSnapshot.components[0].id[1]);
+        // this.componentArray[index] = this.devices[index].deviceSnapshot.components[0].id;
+
+        console.log("component: {}", selectedDevice.deviceSnapshot.components[componentIndex].id);
+        if(this.deviceComponent === selectedDevice.deviceSnapshot.components[componentIndex].id) {
+          //Capabilities
+          var i = 0;
+          console.log("all capabilities: {}", selectedDevice.deviceSnapshot.components[componentIndex].capabilities);
+          for (var capIndex in selectedDevice.deviceSnapshot.components[componentIndex].capabilities) {
+            console.log(" capIndex: {}, capability: {}", capIndex, selectedDevice.deviceSnapshot.components[componentIndex].capabilities[capIndex]);
+            var capbilityId = selectedDevice.deviceSnapshot.components[componentIndex].capabilities[capIndex].id;
+            if (this.ignoreCapabilities.indexOf(capbilityId) === -1) {
+              this.capabilityArray[i] = selectedDevice.deviceSnapshot.components[componentIndex].capabilities[capIndex].id;
+              i = i + 1;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+populateCommands() {
+  console.log("populateCommands() called.");
+  this.deviceCommand = null;
+  this.commandArgument = null;
+  this.commandArray = null;
+  this.argumentArray = null;
+  this.commandArray = new Array();
+
+  if (this.deviceCapability === "switch") {
+    this.commandArray.push('on');
+    this.commandArray.push('off');
+  } else if (this.deviceCapability === "switchLevel") {
+    this.commandArray.push('setLevel');
+    this.populateArguments();
+  } else if (this.deviceCapability === "contactSensor") {
+    if (this.isSimulatedDevice === true) {
+      this.commandArray.push('open');
+      this.commandArray.push('close');
+    }
+  } else if (this.deviceCapability === "motionSensor") {
+    if (this.isSimulatedDevice === true) {
+      this.commandArray.push('active');
+      this.commandArray.push('inactive');
+    }
+  } else if (this.deviceCapability === "presenceSensor") {
+    if (this.isSimulatedDevice === true) {
+      this.commandArray.push('present');
+      this.commandArray.push('not present');
+    }
+  } else if (this.deviceCapability === "smokeDetector") {
+    if (this.isSimulatedDevice === true) {
+      this.commandArray.push('clear');
+      this.commandArray.push('detected');
+    }
+  }
+}
+
+populateArguments() {
+  console.log("populateArguments() called.");
+  this.argumentArray = null;
+
+  if (this.deviceCapability === "switchLevel") {
+    this.argumentArray = new Array();
+    this.argumentArray.push('20');
+    this.argumentArray.push('40');
+    this.argumentArray.push('60');
+    this.argumentArray.push('80');
+    this.argumentArray.push('100');
+  }
+}
+
+populateComponentsAndCapabilities() {
+  this.deviceCommandResponse = null;
+  this.isSimulatedDevice = false;
+  console.log("populateComponentsAndCapabilities() called.");
   console.log("devices", this.devices);
-  this.attributeArray = null;
+  this.commandArray = null;
   this.componentArray = new Array();
   this.capabilityArray = new Array();
   for (var index in this.devices) {
@@ -105,6 +234,9 @@ populateComponents() {
       var selectedDevice = this.devices[index];
 
       console.log("deviceId: {}", selectedDevice.deviceSnapshot.deviceId);
+      if (this.simulatedDeviceTypeNames.indexOf(selectedDevice.deviceTypeName) !== -1) {
+        this.isSimulatedDevice = true;
+      }
       for (var componentIndex in selectedDevice.deviceSnapshot.components) {
         //console.log("device component: {}", this.devices[index].deviceSnapshot.components[0].id[1]);
         // this.componentArray[index] = this.devices[index].deviceSnapshot.components[0].id;
@@ -130,24 +262,49 @@ populateComponents() {
 
 }
 
-populateCapabilities() {
+populateCommandsAndArguments() {
+  this.commandArray = null;
+  this.argumentArray = null;
+  console.log("selected capability: {}", this.deviceCapability);
 
-}
-populateAttributes() {
-  this.attributeArray = null;
- console.log("selected capability: {}", this.deviceCapability);
- this.attributeArray = new Array();
- if (this.deviceCapability === "switch") {
-  this.attributeArray.push('on');
-  this.attributeArray.push('off');
- } else if (this.deviceCapability === "switchLevel") {
-  this.attributeArray.push('');
-  this.attributeArray.push('20');
-  this.attributeArray.push('40');
-  this.attributeArray.push('60');
-  this.attributeArray.push('80');
-  this.attributeArray.push('100');
- }
+  this.commandArray = new Array();
+  if (this.deviceCapability === "switch") {
+    this.commandArray.push('on');
+    this.commandArray.push('off');
+    this.argumentArray = null;
+  } else if (this.deviceCapability === "switchLevel") {
+    this.commandArray.push('setLevel');
+    this.argumentArray = new Array();
+    this.argumentArray.push('20');
+    this.argumentArray.push('40');
+    this.argumentArray.push('60');
+    this.argumentArray.push('80');
+    this.argumentArray.push('100');
+  } else if (this.deviceCapability === "contactSensor") {
+    if (this.isSimulatedDevice === true) {
+      this.commandArray.push('open');
+      this.commandArray.push('close');
+      this.argumentArray = null;
+    }
+  } else if (this.deviceCapability === "motionSensor") {
+    if (this.isSimulatedDevice === true) {
+      this.commandArray.push('active');
+      this.commandArray.push('inactive');
+      this.argumentArray = null;
+    }
+  } else if (this.deviceCapability === "presenceSensor") {
+    if (this.isSimulatedDevice === true) {
+      this.commandArray.push('present');
+      this.commandArray.push('not present');
+      this.argumentArray = null;
+    }
+  } else if (this.deviceCapability === "smokeDetector") {
+    if (this.isSimulatedDevice === true) {
+      this.commandArray.push('clear');
+      this.commandArray.push('detected');
+      this.argumentArray = null;
+    }
+  }
 }
 
 // device command
@@ -158,9 +315,11 @@ onCommandSubmit() {
   console.log("deviceId: ", this.deviceId, );
   console.log("component:", this.deviceComponent);
   console.log("capability:", this.deviceCapability);
-  console.log("attribute:", this.deviceAttribute);
+  console.log("command:", this.deviceCommand);
+  console.log("argument: ", this.commandArgument);
+  console.log("isSumulated: ", this.isSimulatedDevice);
 
-  this.stClient.postDeviceCommand(this.env, this.deviceId, this.deviceComponent, this.deviceCapability, this.deviceAttribute).subscribe(
+  this.stClient.postDeviceCommand(this.env, this.deviceId, this.deviceComponent, this.deviceCapability, this.deviceCommand, this.commandArgument, this.isSimulatedDevice).subscribe(
     response => this.parseDeviceCommandResponse(response)
   );
 }
