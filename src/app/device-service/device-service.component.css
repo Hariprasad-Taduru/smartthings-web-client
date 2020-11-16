@@ -293,7 +293,7 @@ body {
 }
 
 table {
-  width: 65%;
+  width: 80%;
   margin: 20px auto;
   table-layout: auto;
 }
@@ -361,10 +361,10 @@ input {
 }
 
 fieldset {
-  width: 873px;
+  width: 1080px;
   box-sizing: content-box;
   margin:1px 0;
-  margin-left: 242px;
+  margin-left: 140px;
   padding: 10px;
   border-radius:5px;
   height: 120px;

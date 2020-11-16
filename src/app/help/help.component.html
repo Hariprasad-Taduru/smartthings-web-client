@@ -1,5 +1,147 @@
-<div style="margin-left: 160px; margin-top: 0px;">
+
+<div style="display: block; text-align: center;" >
+  <div style="display:inline; margin-left: 930px;">
+      <img
+        width="20"
+        src="../../assets/star1.png"/>
+      <h3 style="display:inline;">&nbsp;&nbsp;Please contact <a style="color:blue;" href="mailto:hariprasad.t@samsung.com">Hariprasad Taduru</a> for further help.</h3>
+  </div>
+</div>
+
+<div>
+  <h3 style="color:blue; margin-left: 7em">Supported Devices & Commands:</h3>
+</div>
+<div style="margin-left: 50px; margin-top: 0px;">
   <table>
+    <thead>
+    <tr>
+      <td><b>Device Category</b></td>
+      <td><b>Device Type</b></td>
+      <td><b>Commands</b></td>
+    </tr>
+  </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><b>SmartThings Devices</b></td>
+        <td>
+          <li style="text-align: left;">Bulb</li>
+          <li style="text-align: left;">Simulated Contact Sensor</li>
+          <li style="text-align: left;">Simulated Motion Sensor</li>
+          <li style="text-align: left;">Simulated Smoke Sensor</li>
+          <li style="text-align: left;">Simulated Lock</li>
+        </td>
+        <td>
+        <li style="text-align: left;">swtich, switch level</li>
+        <li style="text-align: left;">open, close</li>
+        <li style="text-align: left;">active, inactive</li>
+        <li style="text-align: left;">clear</li>
+        <li style="text-align: left;">lock, unlock</li>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left;"><b>VD Devices</b> - OCF & SHP</td>
+        <td>
+          <li style="text-align: left;">TV</li>
+        </td>
+        <td>
+          <li style="text-align: left;">swtich, setVolume, mute, unmute, channelUp, channelDown, mediaInputSource</li>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left;"><b>DA Devices </b> - OCF & SHP</td>
+        <td>
+          <li style="text-align: left;">Robot Vacuum</li>
+          <li style="text-align: left;">Samsung Oven</li>
+          <li style="text-align: left;">Samsung Air Purifier</li>
+        </td>
+        <td>
+          <li style="text-align: left;">swtich, cleaningMode, cleanerMovement, cleanerTurboMode</li>
+          <li style="text-align: left;">swtich, setOvenMode, ovenOperatingState, setOvenSetpoint</li>
+          <li style="text-align: left;">swtich</li>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: left;"><b>C2C</b> - Silvan</td>
+        <td>
+          <li style="text-align: left;"> </li>
+        </td>
+        <td>
+          <li style="text-align: left;"> </li>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<div>
+  <h3 style="color:blue; margin-left: 7em">How to setup this tool:</h3>
+</div>
+<div style="margin-left: 50px; margin-top: 0px;">
+  <table>
+    <!-- <caption style="text-align:center; color:blue;"><h3>How to setup this tool</h3></caption> -->
+    <tbody>
+      <tr>
+        <td><b>Version</b></td>
+        <td style="text-align: left;"><b>3.0</b></td>
+      </tr>
+      <tr>
+        <td><b>Brief</b></td>
+        <td>
+          <li style="text-align: left;">It is zero cost setup tool. Completely instable locally.</li>
+          <li style="text-align: left;">Makes developer/tester easy working with SmartThings Platform.</li>
+          <li style="text-align: left;">For best experience, set Chrome Browser to 110% zoom level.</li>
+        </td>
+      </tr>
+      <tr>
+        <td><b>In Windows OS</b></td>
+        <td>
+          <li style="text-align: left;">Make sure you have installed Java 8.</li>
+          <li style="text-align: left;">Download executable JAR from MOSOIC page.</li>
+          <li style="text-align: left;">Under C drive, create folder "st-postman-config"</li>
+          <li style="text-align: left;">Under folder "st-postman-config", create "env.config" file</li>
+          <li style="text-align: left;">In file "env.config", add your PAT and location id for each environment as below:</li>
+          <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;st.stg.pat.token=</p>
+          <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;st.stg.test.location=</p>
+          <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;st.acpt.pat.token=</p>
+          <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;st.acpt.test.location=</p>
+          <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;st.prd.pat.token=</p>
+          <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;st.prd.test.location=</p>
+          <li style="text-align: left;">Run below command from command prompt:</li>
+          <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;java -jar jar-file</p>
+        </td>
+      </tr>
+      <tr>
+        <td><b>In Ubuntu OS</b></td>
+        <td>
+          <li style="text-align: left;">Make sure you have installed Java 8.</li>
+          <li style="text-align: left;">Download executable JAR from MOSOIC page.</li>
+          <li style="text-align: left;">Under /etc/ folder, create folder "st-postman-config"</li>
+          <li style="text-align: left;">Under folder "st-postman-config", create "env.config" file</li>
+          <li style="text-align: left;">In file "env.config", add your PAT and location id for each environment as mentioned below:</li>
+          <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;st.stg.pat.token=</p>
+          <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;st.stg.test.location=</p>
+          <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;st.acpt.pat.token=</p>
+          <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;st.acpt.test.location=</p>
+          <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;st.prd.pat.token=</p>
+          <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;st.prd.test.location=</p>
+          <li style="text-align: left;">Run below command from bash prompt:</li>
+          <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;java -jar jar-file</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br>
+<div>
+  <br><br><br><br><br><br><br><br>
+  <h3 style="color:blue; margin-left: 7em">More details about this tool:</h3>
+</div>
+<div style="margin-left: 50px; margin-top: 0px;">
+  <table>
+    <!-- <caption style="text-align:center; color:blue;"><h3>More details about this tool</h3></caption> -->
     <thead>
       <tr>
         <td><b>Menu Option</b></td>
@@ -41,8 +183,12 @@
       </tr>
     </tbody>
   </table>
-  </div>
-<br>
-<div class="content" style="margin-top: 400px;">
-  <h3>For further help, please reach out to <a style="color:blue;" href="mailto:hariprasad.taduru@gmail.com">Hariprasad Taduru</a></h3>
+</div>
+<p>
+  <br><br><br> <br><br><br>
+</p>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div id="texts" style="display:inline; white-space:nowrap;">
+    <h2 style="margin-left: 500px;">Contact <a style="color:blue;" href="mailto:hariprasad.t@samsung.com">Hariprasad Taduru</a> for further help.</h2>
+    <br><br><br><br><br><br>
 </div>

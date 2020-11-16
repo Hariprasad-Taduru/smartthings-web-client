@@ -75,12 +75,36 @@ export class StClientService {
     if (isSimulatedDevice === true) {
       simulated = "1";
     }
+    // mediaInputSource
+    // 0 - "AM",
+    // 1 - "CD",
+    // 2 - "FM",
+    // 3 - "HDMI",
+    // 4 - "HDMI1",
+    // 5 - "HDMI2",
+    // 6 - "HDMI3",
+    // 7 - "HDMI4",
+    // 8 - "HDMI5",
+    // 9 - "HDMI6",
+    // 10 - "digitalTv",
+    // 11 - "USB",
+    // 12 - "YouTube",
+    // 13 - "aux",
+    // 14 - "bluetooth",
+    // 15 - "digital",
+    // 16 - "melon",
+    // 17 - "wifi"
     var queryPatamer: string;
     queryPatamer = "deviceId=" + deviceId + "&component=" + component + "&capability=" + capability + "&command=" + command + "&argument=" + argument + "&isSimulatedDevice=" + simulated;
     console.log("Query: ", queryPatamer);
     return this.httpClient.get('http://localhost:5200/st/deviceCommands?' + queryPatamer +  '&env=' + env);
   }
 
+  //Execute scene
+  executeScene(env: string, sceneId: string) {
+    console.log("Scene execute: ", 'http://localhost:5200/st/executeScene?sceneId=' + sceneId +  '&env=' + env)
+    return this.httpClient.post('http://localhost:5200/st/executeScene?sceneId=' + sceneId +  '&env=' + env, "");
+  }
   // Rule API
   getRuleMetaDetails(env: string) {
     console.log(env);
