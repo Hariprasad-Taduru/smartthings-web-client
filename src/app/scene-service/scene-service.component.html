@@ -10,8 +10,8 @@
   &nbsp;&nbsp;&nbsp; <input name="sceneId" [(ngModel)]="sceneId" placeholder="Enter CAPABILITY based Scene Id">
 </div>
 
-<div class="loading-spinner" *ngIf="loadingScene">
-  <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
+<div class="loading-spinner" *ngIf="loadingScene" >
+  <mat-progress-spinner mode="indeterminate" color="primary" diameter="50" strokeWidth="8">
   </mat-progress-spinner>
 </div>
 <br>
@@ -28,6 +28,32 @@
   <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
   </mat-progress-spinner>
 </div>
+
+<!-- Start -->
+<div *ngIf="sceneOcfMetaDetails">
+  <br>
+  <!-- <h3 style="margin-left: 240px;"> Send Command </h3> -->
+    <form id = "eventSubmit" #eventSubmit = "ngForm" (ngSubmit) = "onCommandSubmit()">
+      <fieldset>
+        <label><b>Execute Scene</b></label>&nbsp;&nbsp;&nbsp;
+        <label>Select scene *</label>&nbsp;
+        <select [(ngModel)]= "sceneId" name= "sceneId" required>
+          <option [ngValue]="scene.sceneId" *ngFor = "let scene of sceneMetaDetails">{{scene.sceneName}}</option>
+        </select> &nbsp; &nbsp;
+
+        <button class = "button" align = "center" type = "submit" value = "Submit" [disabled]="!eventSubmit.valid">Submit</button>
+        <br>
+        <div class="loading-spinner" *ngIf="loadingCommand">
+          <br>
+          <mat-progress-spinner mode="indeterminate" color="primary"  diameter="30" strokeWidth="4">
+          </mat-progress-spinner>
+        </div>
+        <h3 style="text-align: center; color: blue;" *ngIf="sceneCommandResponse">{{sceneCommandResponse}}</h3>
+      </fieldset>
+    </form>
+</div>
+<br>
+<!-- End -->
 
 <div style="margin-left: 160px; margin-top: 0px;">
 <table *ngIf="sceneOcfMetaDetails">

@@ -18,6 +18,8 @@ export class SceneServiceComponent implements OnInit {
   sceneId: any;
   ocfSceneId: any;
   sceneOcfMetaDetails: any;
+  loadingCommand: any;
+  sceneCommandResponse: any;
   description: any;
   loadingMeta: boolean = true;
   loadingScene: boolean = false;
@@ -35,6 +37,8 @@ export class SceneServiceComponent implements OnInit {
   ngOnInit(): void {
     this.loadingMeta = true;
     this.ocfSceneId = null;
+    this.loadingCommand = false;
+    this.sceneCommandResponse = null;
     this.env = this.route.snapshot.params['env'];
     this.description = "Fetches all scene meta details.";
     this.getSceneMetaDetails();
@@ -58,11 +62,17 @@ export class SceneServiceComponent implements OnInit {
   }
   this.loadingScene = true;
   this.stClient.getSceneDetails(this.env, this.sceneId).subscribe(
-    response => this.parseSceneResponse(response)
+    response => this.parseSceneResponse(response),
+    error => this.parseSceneDetailsError(error)
   );
 }
-
+parseSceneDetailsError(error) {
+  console.log('Error: {}', error);
+  this.loadingScene = false;
+  this.sceneDetails = "Fetch scene failed.";
+}
  parseResponse(response) {
+  console.log('Scene meta details: {}', response);
    this.loadingMeta = false;
    this.sceneMetaDetails = response;
  }
@@ -76,7 +86,8 @@ export class SceneServiceComponent implements OnInit {
 // OCF Stuff
 getOcfSceneMetaDetails(): void {
   this.stClient.getOCFSceneMetaDetails(this.env).subscribe(
-    response => this.parseOcfSceneMetaResponse(response)
+    response => this.parseOcfSceneMetaResponse(response),
+    error => this.parseSceneDetailsError(error)
   );
 }
 parseOcfSceneMetaResponse(response) {
@@ -103,5 +114,25 @@ parseOcfSceneResponse(response) {
   console.log('OCF Scene detail: {}', response);
   this.loadingScene = false;
   this.ocfSceneDetails = response;
+}
+
+onCommandSubmit() {
+  this.loadingCommand = true;
+  this.sceneCommandResponse = null;
+  console.log('Execute Scene is called for sceneId:  {}', this.sceneId);
+  this.stClient.executeScene(this.env, this.sceneId).subscribe(
+    response => this.parseSceneCommandResponse(response)
+  );
+}
+
+parseSceneCommandResponse(response) {
+  this.sceneCommandResponse = null;
+  this.loadingCommand = false;
+  console.log("scene command response: {}", response);
+  if (response.status === "success") {
+    this.sceneCommandResponse = "Scene execution is successful.";
+  } else {
+    this.sceneCommandResponse = "Scene execution is failed.";
+  }
 }
 }

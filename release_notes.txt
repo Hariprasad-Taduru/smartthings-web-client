@@ -1,0 +1,56 @@
+Version 3.0 release details:
+-----------------------------
+	Date: 16-Nov-2020
+	Features:
+		1. Added support for executing of scenes.
+		2. Added support for executing commands on DA, VD devices
+		
+Version 2.0 release details:
+-----------------------------
+	Date: 07-Nov-2020
+	Features:
+		1. Support for executing commands on devices added.
+
+Version 1.4 release details:
+-----------------------------
+	Date: 01-Nov-2020
+	Features: 
+		1. Support for OCF rules and scenes added.
+		2. Default value for environment is provided as stg in swagger page.
+
+Version 1.3 release details:
+-----------------------------
+	Date: 30-Oct-2020
+	Features:
+		1. Acceptance environment support added.
+		2. More logs are logged in the client classes for debugging.
+
+Version 1.2 release details:
+-----------------------------
+	Date: 26-Oct-2020
+	Features:
+		1. Smart Apps support addded.
+		2. Fixed list scenes with header
+
+Version 1.1 release details:
+-----------------------------
+	Date: 25-Oct-2020
+	Features:
+		1. Application port changed from 9090 to 5200.
+		2. All API's are implemented towards favourite test location.
+		3. Logs are added for all the client classes for tracking.
+		4. All API's are tested for both STG and PRD environments.
+
+Version 1.0 release details:
+-----------------------------
+	Date: 15-Oct-2020
+	Features: 
+		1. Submitted base code for this project.
+		2. All API's are tested for STG environment on both windows and ubuntu machine.
+		3. Currently only GET APi's are supported for below features:
+			a. Location API's
+			b. Device API's
+			c. Scene API's
+			d. Rule API's
+		4. Gives flexibility in testing favorite test location which gives devices, scenes, rules meta information.
+

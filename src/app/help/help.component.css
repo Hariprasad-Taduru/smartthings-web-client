@@ -295,11 +295,11 @@ body {
 }
 
 table {
-  width: 75%;
+  width: 90%;
   margin: 20px auto;
   table-layout: auto;
   float: left;
-  margin-left: 6%;
+  margin-left: 5%;
 }
 
 .fixed {
@@ -360,4 +360,15 @@ input {
 
 .ace_editor.ace-jsoneditor {
   min-height: 500px;
+}
+
+img {
+  animation: blinker 2s  linear;
+  animation-iteration-count: infinite;
+}
+@keyframes blinker {
+  50% { opacity: 0; }
+}
+@keyframes blin {
+  50% { opacity: 0; }
 }

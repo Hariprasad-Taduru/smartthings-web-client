@@ -60,10 +60,14 @@ export class RuleServiceComponent implements OnInit {
     }
     this.loadingRule = true;
     this.stClient.getRuleDetails(this.env, this.ruleId).subscribe(
-      response => this.parseRuleResponse(response)
+      response => this.parseRuleResponse(response),
+      error => this.parseRuleDetailsError(error)
     );
   }
-
+  parseRuleDetailsError(error) {
+    this.loadingRule = false;
+    this.ruleDetails = "Fetch rule failed.";
+  }
   parseRuleMetaResponse(response) {
     console.log('Rules: {}', response);
     this.loadingMeta = false;
@@ -98,7 +102,8 @@ export class RuleServiceComponent implements OnInit {
     }
     this.loadingRule = true;
     this.stClient.getOCFRuleDetails(this.env, this.ocfRuleId).subscribe(
-      response => this.parseOcfRuleResponse(response)
+      response => this.parseOcfRuleResponse(response),
+      error => this.parseRuleDetailsError(error)
     );
   }
 

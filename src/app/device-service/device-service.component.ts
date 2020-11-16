@@ -38,7 +38,7 @@ export class DeviceServiceComponent implements OnInit {
 
   ignoreCapabilities = [
     "configuration", "refresh", "actuator", "healthCheck", "battery", "sensor",
-    "threeAxis", "accelerationSensor", "light"
+    "threeAxis", "accelerationSensor", "light", "ocf"
   ];
 
   simulatedDeviceTypeNames = [
@@ -178,40 +178,147 @@ populateCommands() {
   this.argumentArray = null;
   this.commandArray = new Array();
 
+  // TV commands
   if (this.deviceCapability === "switch") {
     this.commandArray.push('on');
     this.commandArray.push('off');
-  } else if (this.deviceCapability === "switchLevel") {
+  } else if (this.deviceCapability === "audioMute") {
+    this.commandArray.push('mute');
+    this.commandArray.push('unmute');
+  }  else if (this.deviceCapability === "audioVolume") {
+    this.commandArray.push('setVolume');
+    this.populateArguments();
+  } else if (this.deviceCapability === "tvChannel") {
+    this.commandArray.push('channelUp');
+    this.commandArray.push('channelDown');
+  } else if (this.deviceCapability === "mediaInputSource") {
+    this.commandArray.push('setInputSource');
+    this.populateArguments();
+  }
+ // Bulb commands
+  else if (this.deviceCapability === "switchLevel") {
     this.commandArray.push('setLevel');
     this.populateArguments();
-  } else if (this.deviceCapability === "contactSensor") {
+  }
+  // Conntact Sensor
+  else if (this.deviceCapability === "contactSensor") {
     if (this.isSimulatedDevice === true) {
       this.commandArray.push('open');
       this.commandArray.push('close');
     }
-  } else if (this.deviceCapability === "motionSensor") {
+  }
+  // Motion Sensor
+  else if (this.deviceCapability === "motionSensor") {
     if (this.isSimulatedDevice === true) {
       this.commandArray.push('active');
       this.commandArray.push('inactive');
     }
-  } else if (this.deviceCapability === "presenceSensor") {
-    if (this.isSimulatedDevice === true) {
-      this.commandArray.push('present');
-      this.commandArray.push('not present');
-    }
-  } else if (this.deviceCapability === "smokeDetector") {
+  }
+  // Presence Sensor cannot be simulated.
+  // else if (this.deviceCapability === "presenceSensor") {
+  //   if (this.isSimulatedDevice === true) {
+  //     this.commandArray.push('present');
+  //     this.commandArray.push('not present');
+  //   }
+  // }
+
+  // Smoke Sensor
+  else if (this.deviceCapability === "smokeDetector") {
     if (this.isSimulatedDevice === true) {
       this.commandArray.push('clear');
-      this.commandArray.push('detected');
+      // we cannnot perform detected command
+      //this.commandArray.push('detected');
     }
+  } 
+  
+  // Smart Locks
+  else if (this.deviceCapability === "lock") {
+    this.commandArray.push('lock');
+    this.commandArray.push('unlock');
+  }
+
+  // Robot Vacuum 
+  else if (this.deviceCapability === "robotCleanerCleaningMode") {
+    this.commandArray.push('setRobotCleanerCleaningMode');
+    this.populateArguments();
+  } else if (this.deviceCapability === "robotCleanerMovement") {
+    this.commandArray.push('setRobotCleanerMovement');
+    this.populateArguments();
+  } else if (this.deviceCapability === "robotCleanerTurboMode") {
+    this.commandArray.push('setRobotCleanerTurboMode');
+    this.populateArguments();
+  }
+
+  // Samsung Oven
+  else if (this.deviceCapability === "ovenMode") {
+    this.commandArray.push('setOvenMode');
+    this.populateArguments();
+  } else if (this.deviceCapability === "ovenOperatingState") {
+    this.commandArray.push('stop');
+  } else if (this.deviceCapability === "ovenSetpoint") {
+    this.commandArray.push('setOvenSetpoint');
+     this.populateArguments();
   }
 }
 
 populateArguments() {
   console.log("populateArguments() called.");
   this.argumentArray = null;
-
   if (this.deviceCapability === "switchLevel") {
+    this.argumentArray = new Array();
+    this.argumentArray.push('20');
+    this.argumentArray.push('40');
+    this.argumentArray.push('60');
+    this.argumentArray.push('80');
+    this.argumentArray.push('100');
+  } else if (this.deviceCapability === "audioVolume") {
+    this.argumentArray = new Array();
+    this.argumentArray.push('20');
+    this.argumentArray.push('40');
+    this.argumentArray.push('60');
+    this.argumentArray.push('80');
+    this.argumentArray.push('100');
+  } else if (this.deviceCapability === "mediaInputSource") {
+    this.argumentArray = new Array();
+    this.argumentArray.push('HDMI1');
+    this.argumentArray.push('HDMI2');
+    this.argumentArray.push('HDMI3');
+    this.argumentArray.push('HDMI4');
+    this.argumentArray.push('USB');
+    this.argumentArray.push('digitalTv');
+    this.argumentArray.push('bluetooth');
+    this.argumentArray.push('YouTube');
+    this.argumentArray.push('melon');
+    this.argumentArray.push('aux');
+  } else if (this.deviceCapability === "robotCleanerCleaningMode") {
+    this.argumentArray = new Array();
+    this.argumentArray.push('auto');
+    this.argumentArray.push('part');
+    this.argumentArray.push('repeat');
+    this.argumentArray.push('manual');
+    this.argumentArray.push('stop');
+  } else if (this.deviceCapability === "robotCleanerMovement") {
+    this.argumentArray = new Array();
+    this.argumentArray.push('homing');
+    this.argumentArray.push('idle');
+    this.argumentArray.push('charging');
+    this.argumentArray.push('alarm');
+    this.argumentArray.push('reserve');
+    this.argumentArray.push('point');
+    this.argumentArray.push('after');
+    this.argumentArray.push('cleaning');
+  }  else if (this.deviceCapability === "robotCleanerTurboMode") {
+    this.argumentArray = new Array();
+    this.argumentArray.push('on');
+    this.argumentArray.push('off');
+    this.argumentArray.push('silence');
+  } else if (this.deviceCapability === "ovenMode") {
+    this.argumentArray = new Array();
+    this.argumentArray.push('heating');
+    this.argumentArray.push('grill');
+    this.argumentArray.push('warming');
+    this.argumentArray.push('defrosting');
+  } else if (this.deviceCapability === "ovenSetpoint") {
     this.argumentArray = new Array();
     this.argumentArray.push('20');
     this.argumentArray.push('40');
@@ -310,7 +417,7 @@ populateCommandsAndArguments() {
 // device command
 onCommandSubmit() {
   this.loadingCommand = true;
-  this.deviceCommandResponse = null;
+  this.deviceCommandResponse = null; 
   console.log("Device command called.");
   console.log("deviceId: ", this.deviceId, );
   console.log("component:", this.deviceComponent);
