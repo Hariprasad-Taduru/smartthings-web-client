@@ -47,6 +47,10 @@ export class AppComponent {
     this.router.navigate(['help']);
   }
 
+  handleLiveLoggingButton() {
+    this.router.navigate(['livelogging', this.env]);
+  }
+
   handleHomeButton() {
     this.router.navigate(['']);
   }

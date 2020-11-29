@@ -16,6 +16,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { SmartappServiceComponent } from './smartapp-service/smartapp-service.component';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
 import { HelpComponent } from './help/help.component';
+import { LiveLoggingComponent } from './live-logging/live-logging.component';
+import { NgxAutoScrollModule } from 'ngx-auto-scroll';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { HelpComponent } from './help/help.component';
     RuleServiceComponent,
     SceneServiceComponent,
     SmartappServiceComponent,
-    HelpComponent
+    HelpComponent,
+    LiveLoggingComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { HelpComponent } from './help/help.component';
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
-    NgJsonEditorModule
+    NgJsonEditorModule,
+    NgxAutoScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]
