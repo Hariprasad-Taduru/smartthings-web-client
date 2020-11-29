@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { stringify } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 
@@ -56,6 +56,11 @@ export class StClientService {
   getAllLocationsDetails(env: string) {
     console.log(env);
     return this.httpClient.get<Location[]>('http://localhost:5200/st/locations?env=' + env);
+  }
+
+  getLocationId(env: string) {
+    console.log(env);
+    return this.httpClient.get<string>('http://localhost:5200/st/locationId?env=' + env);
   }
 
   // Device API
@@ -157,5 +162,27 @@ export class StClientService {
     getOCFSceneDetails(env: string, ruleId: string) {
       console.log(env);
       return this.httpClient.get('http://localhost:5200/st/ocfSceneDetails?sceneId=' + ruleId + '&env=' + env);
+    }
+
+    getSubscriptionUrl(env: string) {
+      // const httpOptions = {
+      //   headers: new HttpHeaders({
+      //     "Content-Type": "application/json",
+      //     "Authorization": "Bearer " + token,
+      //     "Access-Control-Allow-Origin": '*',
+      //     "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+      //     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization, access-control-allow-origin"
+      //   })
+      // };
+
+      // const body = {
+      //   name: "locationSub",
+      //   version: 1,
+      //   subscriptionFilters: [{"type": "LOCATIONIDS", "value": [locationId]}]
+      // };
+
+     // console.log('headers: ', httpOptions);
+      //console.log('body: ', body);
+      return this.httpClient.get('http://localhost:5200/st/livetrail' + '?env=' + env);
     }
 }

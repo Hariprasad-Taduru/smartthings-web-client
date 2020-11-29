@@ -32,9 +32,14 @@
           <span><h3>Scenes</h3></span>
       </a>
 
-      <a class="card card-small" (click)="handleSmartAppsButton()" tabindex="0">
+      <!-- <a class="card card-small" (click)="handleSmartAppsButton()" tabindex="0">
         <img width="21"  src="../assets/s1.png" class="left"/>
           <span><h3>SmartApps</h3></span>
+      </a> -->
+
+      <a class="card card-small" (click)="handleLiveLoggingButton()" tabindex="0">
+        <img width="35" src="../assets/live5.jpg" class="left"/>
+          <span><h3>LiveEvents</h3></span>
       </a>
 
       <a class="card card-small" (click)="handleHelpButton()" tabindex="0">
@@ -42,9 +47,9 @@
           <span><h3>Help</h3></span>
       </a>
     </div>
+    <!-- <div class="spacer"></div>
     <div class="spacer"></div>
-    <div class="spacer"></div>
-    <div class="spacer"></div>
+    <div class="spacer"></div> -->
 
     <select  class="custom-select" style="width:125px;" [(ngModel)]="env">
       <option value="stg"><h3>Staging</h3></option>
@@ -53,8 +58,8 @@
     </select>
     <div class="spacer"></div>
 
-    <h3>{{ time | date: 'hh:mm a' }}</h3>
-    &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+    <!-- <h3>{{ time | date: 'hh:mm a' }}</h3>
+    &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; -->
 
 </div>
 

@@ -229,15 +229,15 @@ populateCommands() {
       // we cannnot perform detected command
       //this.commandArray.push('detected');
     }
-  } 
-  
+  }
+
   // Smart Locks
   else if (this.deviceCapability === "lock") {
     this.commandArray.push('lock');
     this.commandArray.push('unlock');
   }
 
-  // Robot Vacuum 
+  // Robot Vacuum
   else if (this.deviceCapability === "robotCleanerCleaningMode") {
     this.commandArray.push('setRobotCleanerCleaningMode');
     this.populateArguments();
@@ -417,7 +417,7 @@ populateCommandsAndArguments() {
 // device command
 onCommandSubmit() {
   this.loadingCommand = true;
-  this.deviceCommandResponse = null; 
+  this.deviceCommandResponse = null;
   console.log("Device command called.");
   console.log("deviceId: ", this.deviceId, );
   console.log("component:", this.deviceComponent);
@@ -437,7 +437,7 @@ parseDeviceCommandResponse(response) {
   if (response.commandResponse === "success") {
     this.deviceCommandResponse = "Command execution is successful.";
   } else {
-    this.deviceCommandResponse = "Command execution is failed.";
+    this.deviceCommandResponse = "Command execution is failed. Error: " + response.commandResponse;
   }
 }
 }

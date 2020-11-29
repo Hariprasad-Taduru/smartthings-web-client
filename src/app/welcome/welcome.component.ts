@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class WelcomeComponent implements OnInit {
 
   title = 'Welcome to SmartThings Postman Tool';
-  description = "A web client for testing SmartThings's API's for a configured test location.";
+  description = "A web client for testing SmartThings cloud platform.";
 
   constructor() { }
 

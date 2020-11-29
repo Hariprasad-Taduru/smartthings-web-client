@@ -1,0 +1,21 @@
+<table>
+  <thead>
+    <tr>
+      <th><b>Real time events...</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor ="let event of eventList;">
+      <td>{{event}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="card-container" ngx-auto-scroll>
+  <a class="card card-small" (click)="clearTable()" tabindex="0">
+    <span><h3>Clear</h3></span>
+  </a>
+</div>
+<div ngx-auto-scroll>
+
+</div>
