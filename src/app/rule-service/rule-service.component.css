@@ -106,7 +106,7 @@ svg.material-icons:not(:last-child) {
 
 .card.card-small {
   height: 10px;
-  width: 130px;
+  width: 110px;
 }
 
 .card-container .card:not(.highlight-card) {

@@ -55,15 +55,16 @@ export class LiveLoggingComponent implements OnInit {
   parseSubscriptionResponse(response) {
     console.log('subscription response: ', response);
     var registrationUrl = response.registrationUrl;
+    var token = response.accessToken;
 
-    this.getSSEvents(registrationUrl);
+    this.getSSEvents(registrationUrl, token);
   }
 
-  getSSEvents(registrationUrl: string) {
+  getSSEvents(registrationUrl: string, token: string) {
     console.log('getSSEvents link: ', registrationUrl);
 
     let eventSource = new EventSourcePolyfill(registrationUrl, {headers: {
-              Authorization: 'Bearer c128ab58-8ef7-4abd-9d02-2651298ae9bb',
+              Authorization: token,
               'Content-Type': 'application/json'
               }});
 

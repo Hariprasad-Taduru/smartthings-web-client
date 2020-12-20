@@ -18,6 +18,8 @@ import { NgJsonEditorModule } from 'ang-jsoneditor';
 import { HelpComponent } from './help/help.component';
 import { LiveLoggingComponent } from './live-logging/live-logging.component';
 import { NgxAutoScrollModule } from 'ngx-auto-scroll';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { NgxAutoScrollModule } from 'ngx-auto-scroll';
     SceneServiceComponent,
     SmartappServiceComponent,
     HelpComponent,
-    LiveLoggingComponent
+    LiveLoggingComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +41,7 @@ import { NgxAutoScrollModule } from 'ngx-auto-scroll';
     HttpClientModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
+    MatCardModule,
     MatProgressBarModule,
     NgJsonEditorModule,
     NgxAutoScrollModule

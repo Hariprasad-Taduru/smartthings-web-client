@@ -12,6 +12,11 @@
   <div class="spacer"></div>
     <div class="card-container">
 
+      <a class="card card-small" (click)="handleDashBoardButton()" tabindex="0">
+        <img width="22"  src="../assets/dashboard2.png" class="center"/>
+          <span><h3>Dashboard</h3></span>
+      </a>
+
       <a class="card card-small" (click)="handleLocationsButton()" tabindex="0">
         <img width="27"  src="../assets/13.png" class="center"/>
           <span><h3>Locations</h3></span>
@@ -38,7 +43,7 @@
       </a> -->
 
       <a class="card card-small" (click)="handleLiveLoggingButton()" tabindex="0">
-        <img width="35" src="../assets/live5.jpg" class="left"/>
+        <img width="32" src="../assets/live5.jpg" class="left"/>
           <span><h3>LiveEvents</h3></span>
       </a>
 
@@ -51,7 +56,7 @@
     <div class="spacer"></div>
     <div class="spacer"></div> -->
 
-    <select  class="custom-select" style="width:125px;" [(ngModel)]="env">
+    <select  class="custom-select" style="width:100px;" [(ngModel)]="env">
       <option value="stg"><h3>Staging</h3></option>
       <option value="acpt"><h3>Acceptance</h3></option>
       <option value="prd"><h3>Production</h3></option>
