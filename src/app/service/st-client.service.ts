@@ -165,24 +165,11 @@ export class StClientService {
     }
 
     getSubscriptionUrl(env: string) {
-      // const httpOptions = {
-      //   headers: new HttpHeaders({
-      //     "Content-Type": "application/json",
-      //     "Authorization": "Bearer " + token,
-      //     "Access-Control-Allow-Origin": '*',
-      //     "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
-      //     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization, access-control-allow-origin"
-      //   })
-      // };
-
-      // const body = {
-      //   name: "locationSub",
-      //   version: 1,
-      //   subscriptionFilters: [{"type": "LOCATIONIDS", "value": [locationId]}]
-      // };
-
-     // console.log('headers: ', httpOptions);
-      //console.log('body: ', body);
       return this.httpClient.get('http://localhost:5200/st/livetrail' + '?env=' + env);
+    }
+
+    getUserDetails(env: string) {
+      console.log(env);
+      return this.httpClient.get('http://localhost:5200/st/me?env=' + env);
     }
 }

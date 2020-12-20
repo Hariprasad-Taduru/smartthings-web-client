@@ -1,0 +1,150 @@
+<div class="loading-spinner" *ngIf="loadingUserDetails">
+  <mat-progress-spinner mode="indeterminate" color="primary"  diameter="50" strokeWidth="8">
+  </mat-progress-spinner>
+</div>
+
+ <h2 *ngIf="!loadingUserDetails" style="margin-left: 9%;">&nbsp;&nbsp;Welcome <label style="color:Blue;">{{fullName}}</label>!</h2>
+ <!-- <div>
+  <table *ngIf="!loadingUserDetails">
+    <thead>
+      <tr>
+        <td><b>Email</b></td>
+        <td><b>UUID</b></td>
+        <td><b>Country</b></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{email}}</td>
+        <td>{{uuid}}</td>
+        <td>{{countryCode}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<section class="dash-row">
+<mat-card id="card-0-2">
+  <mat-card-title style="color: black; font-size: medium; text-align: center;">
+    Number of Devices
+  </mat-card-title>
+  <mat-card-content style="color:DodgerBlue; font-size: large; text-align: center;">
+    <h1>120</h1>
+  </mat-card-content>
+</mat-card>
+<br>
+<mat-card id="card-0-2">
+  <mat-card-title style="color: black; font-size: medium; text-align: center;">
+    Number of Rules
+  </mat-card-title>
+  <mat-card-content style="color:DodgerBlue; font-size: large; text-align: center;">
+    <h1>110</h1>
+  </mat-card-content>
+</mat-card>
+<br>
+<mat-card id="card-0-2">
+  <mat-card-title style="color: black; font-size: medium; text-align: center;">
+    Number of Scenes
+  </mat-card-title>
+  <mat-card-content style="color:DodgerBlue; font-size: larger; text-align: center;">
+   <h1>100</h1>
+  </mat-card-content>
+</mat-card>
+<br>
+<mat-card id="card-0-2">
+  <mat-card-title style="color: black; font-size: medium; text-align: center;">
+    Number of Smart Apps
+  </mat-card-title>
+  <mat-card-content style="color:DodgerBlue; font-size: large; text-align: center;">
+    <h1>130</h1>
+  </mat-card-content>
+</mat-card>
+
+</section> -->
+
+<div>
+  <table *ngIf="!loadingUserDetails">
+    <caption style="text-align:left; color:blue;"><h3>Account details:</h3></caption>
+    <thead>
+      <tr>
+        <td><b>Email</b></td>
+        <td><b>UUID</b></td>
+        <td><b>Location Id</b></td>
+        <td><b>Country</b></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{email}}</td>
+        <td>{{uuid}}</td>
+        <td>{{locationId}}</td>
+        <td>{{countryCode}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<h3 *ngIf="locationName" style="margin-left: 10%; color:blue;">Location summary:</h3>
+<div style="display: flex; margin-left: 9%;">
+  <div *ngIf="locationName" style="margin: 1%;">
+    <fieldset style="text-align: center; margin: 1%;">
+      <label><b>Location Name</b></label><br>
+      <label style="color:DodgerBlue;"><h2>{{locationName}}</h2></label><br>
+    </fieldset>
+  </div>
+
+  <div *ngIf="!loadingDevices" style="margin: 1%;">
+    <fieldset style="text-align: center; margin: 1%;">
+      <label><b>Number of Devices</b></label><br>
+      <label style="color:purple;"><h1>{{devicesCount}}</h1></label><br>
+    </fieldset>
+  </div>
+
+  <div *ngIf="!loadingRules" style="margin: 1%;">
+      <fieldset style="text-align: center; margin: 1%;">
+        <label><b>Number of Rules</b></label><br>
+         <label style="color:Orange;"><h1>{{rulesCount}}</h1></label><br>
+      </fieldset>
+  </div>
+
+  <div *ngIf="!loadingScenes" style="margin: 1%;">
+      <fieldset style="text-align: center; margin: 1%;">
+        <label><b>Number of Scenes</b></label><br>
+        <label style="color:Tomato;"><h1>{{scenesCount}}</h1></label><br>
+      </fieldset>
+  </div>
+
+  <div *ngIf="!loadingSmartApps" style="margin: 1%;">
+       <fieldset style="text-align: center; margin: 1%;">
+        <label ><b>Number of SmartApps</b></label><br>
+        <label style="color:Green;"><h1>{{smartAppsCount}}</h1></label><br>
+      </fieldset>
+  </div>
+</div>
+
+<!-- <div style="margin: 1%;">
+      <table *ngIf="deviceDetails">
+        <caption style="text-align:left; color:blue;"><h3>Devices Status</h3></caption>
+        <thead>
+          <tr>
+            <td><b>Device Id</b></td>
+            <td><b>Device Name</b></td>
+            <td><b>Device Type</b></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor ="let device of deviceDetails;">
+            <td>{{device.deviceId}}</td>
+            <td>{{device.deviceLabelName}}</td>
+            <td>{{device.deviceTypeName}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div> -->
+<br>
+<br>
+<div *ngIf="locationName" class="card-container">
+  <a class="card card-small" (click)="refresh()" tabindex="0">
+    <span><h3>Refresh</h3></span>
+  </a>
+</div>

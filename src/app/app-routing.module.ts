@@ -9,9 +9,11 @@ import { SmartappServiceComponent } from './smartapp-service/smartapp-service.co
 import { WelcomeComponent } from './welcome/welcome.component';
 import { HelpComponent } from './help/help.component';
 import { LiveLoggingComponent } from './live-logging/live-logging.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
+  {path: 'dashboard/:env', component: DashboardComponent},
   {path: 'locations/:env', component: LocationServiceComponent},
   {path: 'devices/:env', component: DeviceServiceComponent},
   {path: 'rules/:env', component: RuleServiceComponent},

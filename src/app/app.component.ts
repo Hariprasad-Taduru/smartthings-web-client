@@ -19,6 +19,9 @@ export class AppComponent {
       this.time = new Date();
    }, 1000);
   }
+  handleDashBoardButton() {
+    this.router.navigate(['dashboard', this.env]);
+  }
 
   handleLocationsButton() {
     this.router.navigate(['locations', this.env]);
